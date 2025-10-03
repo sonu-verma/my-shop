@@ -52,6 +52,12 @@ header .header-container {
     }
 }
 
+.selected {
+    background-color: green;
+    color: white;
+    padding: 10px;
+}
+
 .searchDropdownDiv{
     display: flex;
     padding: 0px 0px 0px 20px;
@@ -89,7 +95,26 @@ header .header-container {
         gap: 20px;
         list-style: none;
         margin-bottom: 0px !important;
+
+        li {
+            display: flex;
+            gap: 7px;
+            align-items: center;
+        }
     }
     
     align-items: center;
+}
+
+.icon-counter {
+    position: relative;
+    i {
+        font-size: 20px;
+    }
+    .total-count {
+        position: absolute;
+        background: green;
+        top: -8px;
+        left: 7px;
+    }
 }

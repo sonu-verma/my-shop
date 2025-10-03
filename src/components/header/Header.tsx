@@ -6,9 +6,8 @@ import type { Category } from './../../types/category';
 import type { Location } from './../../types/location';
 import Select from '../select/Select';
 const Header = () =>{
-
-
     const PRODUCT_CATEGORIES: Category[] = [
+        { id: "0", name: "All Category" },
         { id: "1", name: "Food & Beverage" },
         { id: "2", name: "Beauty & Fragrances" },
         { id: "3", name: "Office & Stationery" },
@@ -25,6 +24,7 @@ const Header = () =>{
 
     
     const LOCACTIONS: Location[] = [
+        { id: "0", name: "Location" },
         { id: "1", name: "India" },
         { id: "2", name: "Sri Lanka" },
         { id: "3", name: "Nepal" },
@@ -40,6 +40,9 @@ const Header = () =>{
     const [headerLocationSelect, setHeaderLocationSelect] = useState(false);
     const [ currentLocation, setCurrentLocation] = useState(false);
 
+    const [selectedCategoryId, setSelectedCategoryId] = useState(0);
+    const [selectedLocationId, setSelectedLocationId] = useState(0);
+
     const handleHeaderCategorySelect = () => {
         setHeaderCategorySelect(!headerCategorySelect);
         console.log("Header Category Select : ", headerCategorySelect);
@@ -53,6 +56,7 @@ const Header = () =>{
 
     const handleCategorySelectionValue = ( category: string ) => {
         setCurrentCategory(category?.name);
+        setSelectedCategoryId(category.id);
         setHeaderCategorySelect(false)
        console.log("Category Selected : ", category);
     }
@@ -60,6 +64,7 @@ const Header = () =>{
     
     const handleLocationSelectionValue = ( location: string ) => {
         setCurrentLocation(location?.name);
+        setSelectedLocationId(location.id);
         setHeaderLocationSelect(false)
        console.log("Category Selected : ", location);
     }
@@ -82,7 +87,7 @@ const Header = () =>{
                                 <i className={ headerCategorySelect ? 'dropdownSelected' : ''}>^</i>
                             </div>
                            
-                            { headerCategorySelect && <Select lists = {PRODUCT_CATEGORIES} onSelect = { handleCategorySelectionValue} />  }
+                            { headerCategorySelect && <Select lists = {PRODUCT_CATEGORIES} selectedId = {selectedCategoryId} onSelect = { handleCategorySelectionValue} />  }
                         </div>
                         
                         <input type="text" placeholder="Search for items..." />
@@ -95,25 +100,47 @@ const Header = () =>{
                             <div className='categoryTitle'  onClick={() => handleHeaderLocationSelect()}>
                                 <span>
                                     {
-                                        currentLocation ? currentLocation : 'Your Location'
+                                        currentLocation ? currentLocation : 'Location'
                                     }
                                 </span>
                                 <i className={ headerLocationSelect ? 'dropdownSelected' : ''}>^</i>
                             </div>
                            
-                            { headerLocationSelect && <Select lists = {LOCACTIONS} onSelect = {handleLocationSelectionValue} />  }
+                            { headerLocationSelect && <Select lists = {LOCACTIONS} selectedId={selectedLocationId} onSelect = {handleLocationSelectionValue} />  }
                         </div>
                         <ul className='headerMenu'>
-                            <li>Compare</li>
-                            <li>Whishlist</li>
-                            <li>Cart</li>
-                            <li>Account</li>
+                            {/* <li>
+                                 <div className='icon-counter'>
+                                    <i className="bi bi-universal-access-circle"></i>
+                                    <div className='total-count badge'>0</div>
+                                </div>
+                                <span>Compare</span>
+                            </li> */}
+                            <li>
+                                <div className='icon-counter'>
+                                    <i className="bi bi-heart"></i>
+                                    <div className='total-count badge'>0</div>
+                                </div>
+                                <span>Whishlist</span>
+                            </li>
+                            <li>
+                                <div className='icon-counter'>
+                                    <i className="bi bi-cart3"></i>
+                                    <div className='total-count badge'>0</div>
+                                </div>
+                                <span>Cart</span>
+                            </li>
+                            <li>
+                                <div className='icon-counter'>
+                                    <i className="bi bi-person-lines-fill"></i>
+                                </div>
+                                <span>Account</span>
+                            </li>
                         </ul>
                     </div>
                 </div>
             </div>  
         </header>
-        
     </>;
 }
 
