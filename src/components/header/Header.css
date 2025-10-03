@@ -1,10 +1,95 @@
 header {
     background-color: wheat;
+    position: relative;
 }
 
 header .header-container {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    gap: 20px;
     padding: 10px;
+
+    .logo img{
+        display: block;
+        height: 49px;
+        width: auto;
+    }
+}
+
+.search-bar {
+    background-color: white;
+    border: 1px solid green;
+    padding: 4px 0px;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    input, select {
+        margin: 2px;
+        padding: 7px;
+        border: none;
+        outline: none;
+    }
+    input {
+        width: 75%;
+        border-left: 2px solid rgb(235, 230, 230);
+    }
+    select {
+        padding-right: 20px;
+    }
+
+    .search-icon{
+        cursor: pointer;
+        :hover{
+            background-color: green;
+            color: white;
+            padding: 10px;
+            border-radius: 20%;
+        }
+        padding: 10px;
+        margin-right: 6px;
+    }
+}
+
+.searchDropdownDiv{
+    display: flex;
+    padding: 0px 0px 0px 20px;
+    text-align: center;
+    position: relative;
+    align-items: center;
+    gap: 6px;
+    z-index: 99999;
+    .categoryTitle {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+        i {
+            font-size: 20px;
+            cursor: pointer;
+            margin-top: 9px;
+        }
+    }
+   
+}
+
+
+ .dropdownSelected {
+    transform: rotate(180deg);
+    margin-top: -9px !important;
+    transition: all 0.3s ease-in-out;
+}
+
+
+.header-links {
+    display: flex;
+   .headerMenu{
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        list-style: none;
+        margin-bottom: 0px !important;
+    }
+    
+    align-items: center;
 }
