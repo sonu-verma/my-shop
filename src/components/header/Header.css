@@ -1,6 +1,7 @@
 header {
-    background-color: wheat;
+    /* background-color: wheat; */
     position: relative;
+    box-shadow: 1px 1px 10px #c0bebe;
 }
 
 header .header-container {
@@ -8,7 +9,7 @@ header .header-container {
     align-items: center;
     /* justify-content: space-between; */
     gap: 20px;
-    padding: 10px;
+    padding: 15px;
 
     .logo img{
         display: block;
@@ -58,14 +59,22 @@ header .header-container {
     padding: 10px;
 }
 
+
+.subMenuList li:hover {
+    background-color: green;
+    color: white;
+    padding: 1px;
+}
+
 .searchDropdownDiv{
     display: flex;
-    padding: 0px 0px 0px 20px;
+    padding: 1px 7px 3px 14px;
     text-align: center;
     position: relative;
     align-items: center;
     gap: 6px;
     z-index: 99999;
+    background-color: white;
     .categoryTitle {
         display: flex;
         gap: 6px;
@@ -116,5 +125,22 @@ header .header-container {
         background: green;
         top: -8px;
         left: 7px;
+    }
+}
+
+
+.subMenu {
+    position: relative;
+
+    ul {
+        position: absolute;
+        right: 0px;
+        padding: 10px;
+        line-height: 30px;
+        width: 110px;
+        top: 40px;
+        font-size: 15px;
+        box-shadow: 1px 1px 10px #c0bebe;
+        background-color: white;
     }
 }

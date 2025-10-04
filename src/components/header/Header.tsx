@@ -5,6 +5,7 @@ import { useState } from 'react';
 import type { Category } from './../../types/category';
 import type { Location } from './../../types/location';
 import Select from '../select/Select';
+import Nav from './nav/Nav';
 const Header = () =>{
     const PRODUCT_CATEGORIES: Category[] = [
         { id: "0", name: "All Category" },
@@ -34,14 +35,16 @@ const Header = () =>{
 
 
     const [headerCategorySelect, setHeaderCategorySelect] = useState(false);
-    const [ currentCategory, setCurrentCategory] = useState(false);
+    const [ currentCategory, setCurrentCategory] = useState<string>("");
 
     
     const [headerLocationSelect, setHeaderLocationSelect] = useState(false);
-    const [ currentLocation, setCurrentLocation] = useState(false);
+    const [ currentLocation, setCurrentLocation] = useState<string>("");
 
     const [selectedCategoryId, setSelectedCategoryId] = useState(0);
     const [selectedLocationId, setSelectedLocationId] = useState(0);
+
+    const [accountMenuShow, setAccountMenuShow] = useState(false);
 
     const handleHeaderCategorySelect = () => {
         setHeaderCategorySelect(!headerCategorySelect);
@@ -54,17 +57,17 @@ const Header = () =>{
     }
 
 
-    const handleCategorySelectionValue = ( category: string ) => {
+    const handleCategorySelectionValue = ( category: Category ) => {
         setCurrentCategory(category?.name);
-        setSelectedCategoryId(category.id);
+        setSelectedCategoryId(Number(category.id));
         setHeaderCategorySelect(false)
        console.log("Category Selected : ", category);
     }
 
     
-    const handleLocationSelectionValue = ( location: string ) => {
+    const handleLocationSelectionValue = ( location: Location ) => {
         setCurrentLocation(location?.name);
-        setSelectedLocationId(location.id);
+        setSelectedLocationId(Number(location.id));
         setHeaderLocationSelect(false)
        console.log("Category Selected : ", location);
     }
@@ -81,7 +84,7 @@ const Header = () =>{
                             <div className='categoryTitle'  onClick={() => handleHeaderCategorySelect()}>
                                 <span>
                                     {
-                                        currentCategory ? currentCategory : 'All Categories'
+                                        currentCategory ? currentCategory.substr(0,12)+'..'  : 'All Categories'
                                     }
                                 </span>
                                 <i className={ headerCategorySelect ? 'dropdownSelected' : ''}>^</i>
@@ -100,7 +103,7 @@ const Header = () =>{
                             <div className='categoryTitle'  onClick={() => handleHeaderLocationSelect()}>
                                 <span>
                                     {
-                                        currentLocation ? currentLocation : 'Location'
+                                        currentLocation ? (currentLocation.length > 10 ? currentLocation.substr(0,12)+'..' : currentLocation) : 'Location'
                                     }
                                 </span>
                                 <i className={ headerLocationSelect ? 'dropdownSelected' : ''}>^</i>
@@ -134,12 +137,27 @@ const Header = () =>{
                                 <div className='icon-counter'>
                                     <i className="bi bi-person-lines-fill"></i>
                                 </div>
-                                <span>Account</span>
+                                <div className='subMenu'>
+                                    <span onClick={ () => setAccountMenuShow(!accountMenuShow)}>Account</span>
+                                   {
+                                     accountMenuShow &&  <ul className='subMenuList'>
+                                        <li className='link'>
+                                            <i className="bi bi-person"></i>
+                                            <span>Login</span>
+                                        </li>
+                                        <li className='link'>
+                                            <i className="bi bi-person-add"></i>
+                                            <span>Register</span>
+                                        </li>
+                                    </ul> 
+                                    }
+                                </div>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>  
+            <Nav />
         </header>
     </>;
 }
